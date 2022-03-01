@@ -1,0 +1,29 @@
+WIN版Python仮想環境設定方法
+
+
+リンク：
+https://www.python.jp/install/windows/virtualenv.html
+
+Virtualenvのインストール
+Virtualenvは、pip コマンドでインストールできます。
+
+C:\> py -m pip install virtualenv
+
+C:●> py -m virtualenv ＜仮想環境名＞
+
+
+コマンド プロンプトでの切り替え
+作成した仮想環境の Scripts\activate.bat を実行します
+
+C:\Users\USER\OneDrive\デスクトップ\todo-app\py3env\Scripts\activate.bat
+
+仮想環境の終了
+仮想環境の使用を終え、通常の状態に復帰するときは、deactivate コマンドを実行します。
+
+(py3env) PS C:\Users\user1> deactivate
+
+コマンド
+conda activate base
+
+ブラウザでログイン
+http://localhost:5000/
