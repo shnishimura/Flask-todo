@@ -1,2 +1,9 @@
 git config --global user.name "nishimura shunsuke"
 git config --global user.email "nishimurashunsuke01@gmail.com"
+
+Flask学習時メモ
+
+VsCodeの拡張機能か？
+勝手にインポートされる機能を調べてＯＦＦにするようにする
+
+
