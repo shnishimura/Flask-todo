@@ -1,7 +1,9 @@
+
 from datetime import datetime
 
 from flask import Flask, render_template, redirect, request
 from flask_sqlalchemy import SQLAlchemy
+from pytest import Session
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///todo.db'
@@ -37,6 +39,34 @@ def index():
 def create():
     return render_template('create.html')
 
+@app.route('/detail/<int:id>')
+def read(id):
+    post = Post.query.get(id)
+    return render_template('detail.html',post=post)
+
+@app.route('/update/<int:id>', methods=['GET','POST'])
+def update(id):
+    post = Post.query.get(id)
+    if request.method == 'GET':
+        return render_template('update.html',post=post)
+        # updatのページ
+    else:
+        post.title = request.form.get('title')
+        post.detail = request.form.get('detail')
+        post.due = datetime.strptime(request.form.get('due'),'%Y-%m-%d')
+        
+        db.session.commit()
+        return redirect('/')
+        #dbに反映
+        #トップページに
+
+@app.route('/delete/<int:id>')
+def delete(id):
+    post = Post.query.get(id)
+    
+    db.session.delete(post)
+    db.session.commit()
+    return redirect('/')
 
 if __name__ == '__main__':
     app.run(debug=True)
