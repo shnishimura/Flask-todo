@@ -1,7 +1,7 @@
 
-from datetime import datetime
+from datetime import date, datetime
 
-from flask import Flask, render_template, redirect, request
+from flask import Flask, render_template, redirect, request, url_for
 from flask_sqlalchemy import SQLAlchemy
 from pytest import Session
 
@@ -20,8 +20,8 @@ class Post(db.Model):
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'GET':
-        posts = Post.query.all()
-        return render_template('index.html', posts=posts)
+        posts = Post.query.order_by(Post.due).all()
+        return render_template('index.html', posts=posts, today=date.today())
     else:
         title = request.form.get('title')
         detail = request.form.get('detail')

@@ -1,12 +1,23 @@
 {% extends 'base.html' %}
 
 {% block body %}
-<h1>トップページ</h1>
-{% for post in posts  %}
-<h2>タイトル：{{ post.title }}</h2>
-<p>期限：{{ post.due.date()}}</p>
-<a href="detail/{{post.id}}" role="button">Detail</a>
-<a href="update/{{post.id}}" role="button">Update</a>
-<a href="delete/{{post.id}}" role="button">Delete</a>
+<div class="d-grid gap-2 col-6 mx-auto">
+    <a class="btn btn-primary" type="button" href="/create" role="button">CREATE NEW TASK</a>
+</div>
+{% for post in posts %}
+<div class="card w-50 mb-3" style="margin: auto;">
+    <div class="card-body">
+        {% if post.due.date() < today %} <div class="alert alert-warning" role="alert">
+            期限が過ぎています！！
+    </div>
+    {% endif %}
+    <h2 class="card-title">タイトル：{{ post.title }}</h2>
+    <p>期限：{{ post.due.date()}}</p>
+    <a class="btn btn-outline-secondary btn-sm" href="detail/{{post.id}}" role="button">詳細</a>
+    <a class="btn btn-outline-success btn-sm" href="update/{{post.id}}" role="button">更新</a>
+    <a class="btn btn-outline-danger btn-sm" href="delete/{{post.id}}" role="button">削除</a>
+</div>
+</div>
+
 {% endfor %}
 {% endblock %}
